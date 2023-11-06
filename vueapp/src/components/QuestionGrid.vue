@@ -57,7 +57,7 @@ import { defineComponent } from 'vue';
                 this.data = await StackOverflowService.GetGrid();
             },
             View (id: number): void{
-                alert(id);
+                this.$emit("view", id);
             }
         },
     });

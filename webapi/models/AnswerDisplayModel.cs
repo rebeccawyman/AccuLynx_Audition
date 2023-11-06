@@ -11,6 +11,7 @@
 
     public class AnswerDisplayModel
     {   
+        public int AnswerId { get; set; }
         public bool IsAccepted { get; set; }
         public string Body { get; set; }
         public string Owner { get; set; }

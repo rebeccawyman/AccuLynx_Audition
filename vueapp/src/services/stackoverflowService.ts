@@ -1,5 +1,6 @@
+import { QuestionDisplayModel } from "@/classes/QuestionAnswerModel";
 import { QuestionGridModel } from "@/classes/QuestionGrid";
-import { DeserializeArray } from "@/helpers/JsonMapper";
+import { Deserialize, DeserializeArray } from "@/helpers/JsonMapper";
 import axios, { type AxiosResponse } from "axios";
 
 const BASE_URL = "/api";
@@ -12,9 +13,9 @@ class _stackoverflowService {
         return DeserializeArray(QuestionGridModel, response.data);
     }
 
-    public async GetQuestion(id: number): Promise<QuestionGridModel[]>{
+    public async GetQuestion(id: number): Promise<QuestionDisplayModel>{
         const response: AxiosResponse<JsonMapper.IGenericObject[]> = await axios.get<JsonMapper.IGenericObject[]>(`${BASE_URL}/GetQuestion/${id}`);
-        return DeserializeArray(QuestionGridModel, response.data);
+        return Deserialize(QuestionDisplayModel, response.data);
     }
 
 }

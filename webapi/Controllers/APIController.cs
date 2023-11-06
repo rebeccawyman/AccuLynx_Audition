@@ -90,7 +90,7 @@ public class APIController : ControllerBase
                     {
                         var model = JsonSerializer.Deserialize<StackOverflowAnswerModel>(data);
                         if (model != null)
-                            result.Answers = model.items.Select(x => new AnswerDisplayModel { Owner = x.owner.display_name, Body = x.body, IsAccepted = x.is_accepted, Link = x.link }).ToList();
+                            result.Answers = model.items.Select(x => new AnswerDisplayModel { AnswerId = x.answer_id, Owner = x.owner.display_name, Body = x.body, IsAccepted = x.is_accepted, Link = x.link }).ToList();
                     }
                     catch (Exception ex)
                     {

@@ -1,7 +1,11 @@
 <script setup lang="ts">
-import Grid from './components/QuestionGrid.vue'
+import ViewWrapper from "./components/ViewWrapper.vue"
 </script>
 
+
 <template>
-  <Grid></Grid>
+  <main>
+    <ViewWrapper></ViewWrapper>
+  </main>
 </template>
+
