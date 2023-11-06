@@ -1,3 +1,29 @@
+## Project Notes:
+
+Honestly struggled using the default scaffolding from Visual Studio, swagger caused me some problems calling the API the way I am used to
+There is a hard code localhost port as a result of problems with swagger
+
+Encountered problems with CORS too
+
+UI is not the cleanest nor is it the smoothest, I appologize for that
+
+Was going to try hosting it somewhere, but ran out of time
+
+To use:
+Need Node.js (insalled dependancies on install)
+Used Yarn to install packages
+
+Should be able to run the project after install packages from Visual Studio
+
+Development was done half in Visual Studio, Half in VS Code
+
+Minial packages were used, should have looked for a toolkit or used one I was used
+
+Left default pages from Microsoft
+
+Wanted to do a lot different with the front end, but spent too much time fighting with swagger
+
+## FROM Microsoft
 # vueapp
 
 This template should help get you started developing with Vue 3 in Vite.

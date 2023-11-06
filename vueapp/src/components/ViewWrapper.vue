@@ -1,10 +1,10 @@
 <template>
     <div class="row">
-      <div class="col-6">
+      <div v-show="Id === 0">
         <Grid @view="UpdateId"></Grid>
       </div>
-      <div class="col-6">
-        <Question v-if="Id > 0" :id="Id"></Question>
+      <div v-show="Id > 0">
+        <Question :id="Id" @back="ClearId"></Question>
       </div>
     </div>
 </template>
@@ -34,6 +34,9 @@ import Question from "./QuestionAnswer.vue"
         methods: {
             UpdateId(Id: number): void {
                 this.selectId = Id;
+            },
+            ClearId(): void{
+                this.selectId = 0;
             }
         },
     });

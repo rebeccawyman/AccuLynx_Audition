@@ -1,5 +1,8 @@
 <template>
     <div class="container">
+        <div class="row">
+            <button @click="BackToList">Back to list</button>    
+        </div>
         <div class="row border-bottom">
             <div class="col">
                 <h1>Question</h1>
@@ -38,7 +41,7 @@ import { defineComponent } from 'vue';
     props: {
         id: {
             type: Number,
-            default: 0
+            required: true
         }
     },
     data() {
@@ -60,6 +63,9 @@ import { defineComponent } from 'vue';
             else{
                 alert("This is not the accpted answer");
             }
+        },
+        BackToList() : void{
+            this.$emit("back");
         }
     },
 });
