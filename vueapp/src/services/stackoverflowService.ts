@@ -12,6 +12,11 @@ class _stackoverflowService {
         return DeserializeArray(QuestionGridModel, response.data);
     }
 
+    public async GetQuestion(id: number): Promise<QuestionGridModel[]>{
+        const response: AxiosResponse<JsonMapper.IGenericObject[]> = await axios.get<JsonMapper.IGenericObject[]>(`${BASE_URL}/GetQuestion/${id}`);
+        return DeserializeArray(QuestionGridModel, response.data);
+    }
+
 }
 
 export const StackOverflowService: _stackoverflowService = new _stackoverflowService();
