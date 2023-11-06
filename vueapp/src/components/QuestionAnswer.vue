@@ -2,16 +2,28 @@
     <div class="container">
         <div class="row border-bottom">
             <div class="col">
-                <span>{{ data.title }}</span>
-                <span>{{ data.owner}}</span>
-                <div>{{ data.body }}</div>
+                <h1>Question</h1>
+                <div class="row">
+                    <span>Title: {{ data.title }}</span>
+                </div>
+                <div class="row">
+                    <span>Owner: {{ data.owner}}</span>
+                </div>
+                <div class="row">
+                    <div v-html="data.body"></div>
+                </div>
             </div>
         </div>
-        <div class="row board-bottom" v-for="answer in data.answers" :key="answer.answerId">
+        <div class="row">
+            <div class="col">
+                <h1>Answers</h1>
+            </div>
+        </div>
+        <div class="row border-bottom border-primary" v-for="answer in data.answers" :key="answer.answerId">
             <div class="col">
                 <span>{{ answer.owner }}</span>
-                <button @click="CheckAccepted(answer.isAccepted)"> Guess Answer</button>
-                <div>{{ answer.body }}</div>
+                <button @click="CheckAccepted(answer.isAccepted)" class="float-end"> Guess Answer</button>
+                <div v-html="answer.body"></div>
             </div>
         </div>
     </div>
@@ -38,7 +50,7 @@ import { defineComponent } from 'vue';
     watch:{
         async id(): Promise<void>{
             this.data = await StackOverflowService.GetQuestion(this.id);
-        }
+        }   
     },
     methods: {
         CheckAccepted(IsAccepted: boolean): void{

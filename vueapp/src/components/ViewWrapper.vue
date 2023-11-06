@@ -4,7 +4,7 @@
         <Grid @view="UpdateId"></Grid>
       </div>
       <div class="col-6">
-        <Question :id="Id"></Question>
+        <Question v-if="Id > 0" :id="Id"></Question>
       </div>
     </div>
 </template>
@@ -20,7 +20,7 @@ import Question from "./QuestionAnswer.vue"
             Question
         },
         computed: {
-            Id(): Number
+            Id(): number
             {
                 return this.selectId;
             }
