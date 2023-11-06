@@ -1,23 +1,33 @@
 <template>
-    <div>
-        <table>
-                <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Answer Count</th>
-                        <th>Owner</th>
-                        <th>Tags</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="question in data" :key="question.question_id">
-                        <td>{{ question.title }}</td>
-                        <td>{{ question.answer_count }}</td>
-                        <td>{{ question.owner }}</td>
-                        <td>{{ question.tags }}</td>
-                    </tr>
-                </tbody>
-            </table>
+    <div class="container">
+        <div class="row">
+            <div class="col-5">
+                <span>Title</span>
+            </div>
+            <div class="col-1">
+                <span>Answer Count</span>
+            </div>
+            <div class="col-3">
+                <span>Owner</span>
+            </div>
+            <div class="col-3">
+                <span>Tags</span>
+            </div>
+        </div>
+        <div class="row" v-for="question in data" :key="question.question_id">
+            <div class="col-5">
+                <span>{{question.title}}</span>
+            </div>
+            <div class="col-1">
+                <span>{{question.answer_count}}</span>
+            </div>
+            <div class="col-3">
+                <span>{{question.owner}}</span>
+            </div>
+            <div class="col-3">
+                <span>{{question.tags}}</span>
+            </div>
+        </div>
     </div>
 </template>
 

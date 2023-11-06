@@ -3,7 +3,5 @@ import Grid from './components/QuestionGrid.vue'
 </script>
 
 <template>
-  <main>
-    <Grid />
-  </main>
+  <Grid></Grid>
 </template>
