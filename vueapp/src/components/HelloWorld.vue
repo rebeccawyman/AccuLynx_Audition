@@ -15,12 +15,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="forecast in post" :key="forecast.date">
+                    <!-- <tr v-for="forecast in post" :key="forecast.date">
                         <td>{{ forecast.date }}</td>
                         <td>{{ forecast.temperatureC }}</td>
                         <td>{{ forecast.temperatureF }}</td>
                         <td>{{ forecast.summary }}</td>
-                    </tr>
+                    </tr> -->
                 </tbody>
             </table>
         </div>
@@ -57,16 +57,16 @@
         },
         methods: {
             fetchData(): void {
-                this.post = null;
-                this.loading = true;
+                // this.post = null;
+                // this.loading = true;
 
-                fetch('weatherforecast')
-                    .then(r => r.json())
-                    .then(json => {
-                        this.post = json as Forecasts;
-                        this.loading = false;
-                        return;
-                    });
+                // fetch('weatherforecast')
+                //     .then(r => r.json())
+                //     .then(json => {
+                //         this.post = json as Forecasts;
+                //         this.loading = false;
+                //         return;
+                //     });
             }
         },
     });
