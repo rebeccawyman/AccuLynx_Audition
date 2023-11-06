@@ -50,15 +50,36 @@ public class APIController : ControllerBase
         }
     }
     [HttpGet("GetQuestion/{id}")]
-    public async Task<List<QuestionListModel>> GetQuestionAsync(int id)
+    public async Task<QuestionDisplayModel> GetQuestionAsync(int id)
     {
         // Get the data.
         using (var client = new HttpClient(new HttpClientHandler { AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate }))
         {
-            client.BaseAddress = new Uri("https://api.stackexchange.com/2.3");
-            HttpResponseMessage response = await client.GetAsync("search/advanced?order=desc&sort=creation&accepted=True&answers=2&site=stackoverflow");
+            QuestionDisplayModel result = new QuestionDisplayModel();
 
-            List<QuestionListModel> result = new List<QuestionListModel>();
+            client.BaseAddress = new Uri("https://api.stackexchange.com/2.3");
+
+            HttpResponseMessage questionResponse = await client.GetAsync("questions/" + id.ToString() + "?order=desc&sort=activity&site=stackoverflow&filter=!nNPvSNPI7A");
+
+            if (questionResponse.IsSuccessStatusCode)
+            {
+                var data = questionResponse.Content.ReadAsStringAsync().Result;
+                if (data != null)
+                {
+                    try
+                    {
+                        var model = JsonSerializer.Deserialize<StackOverflowSearchModel>(data);
+                        if (model != null)
+                            result = model.items.Select(x => new QuestionDisplayModel { Title = x.title, Owner = x.owner.display_name, Body = x.body, Answers = new List<AnswerDisplayModel>() }).ToList().First();
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger.LogError(ex, "unable to query data");
+                    }
+                }
+            }
+
+            HttpResponseMessage response = await client.GetAsync("questions/" + id.ToString() +"/answers?order=desc&sort=activity&site=stackoverflow&filter=!6WPIomp-eb(U5");
 
             if (response.IsSuccessStatusCode)
             {
@@ -67,9 +88,9 @@ public class APIController : ControllerBase
                 {
                     try
                     {
-                        var model = JsonSerializer.Deserialize<StackOverflowSearchModel>(data);
+                        var model = JsonSerializer.Deserialize<StackOverflowAnswerModel>(data);
                         if (model != null)
-                            result = model.items.Select(x => new QuestionListModel { title = x.title, owner = x.owner.display_name, answer_count = x.answer_count, question_id = x.question_id, tags = String.Join(", ", x.tags.ToArray()) }).ToList();
+                            result.Answers = model.items.Select(x => new AnswerDisplayModel { Owner = x.owner.display_name, Body = x.body, IsAccepted = x.is_accepted, Link = x.link }).ToList();
                     }
                     catch (Exception ex)
                     {
