@@ -5,6 +5,7 @@
                     <tr>
                         <th>Title</th>
                         <th>Answer Count</th>
+                        <th>Owner</th>
                         <th>Tags</th>
                     </tr>
                 </thead>
@@ -12,7 +13,8 @@
                     <tr v-for="question in data" :key="question.question_id">
                         <td>{{ question.title }}</td>
                         <td>{{ question.answer_count }}</td>
-                        <td>{{ question.tags.concat(",") }}</td>
+                        <td>{{ question.owner }}</td>
+                        <td>{{ question.tags }}</td>
                     </tr>
                 </tbody>
             </table>
@@ -37,7 +39,6 @@ import { defineComponent } from 'vue';
         methods: {
             async LoadData(): Promise<void>{
                 this.data = await StackOverflowService.GetGrid();
-                alert(this.data);
             },
         },
     });
